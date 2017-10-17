@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Fetch from 'react-fetch';
 import Note from './Note';
 
 class Board extends Component {
@@ -12,6 +13,20 @@ class Board extends Component {
     this.remove = this.remove.bind(this);
     this.eachNote = this.eachNote.bind(this);
   }
+  // componentWillMount() {
+  //   if (this.props.count) {
+  //     var url = 'http://baconipsum.com/api/?type=all-meat&sentences=${this.props.count}'
+  //     fetch(url)
+  //       .then(results => results.json())
+  //       .then(array => array[0])
+  //       .then(text => text.split('. '))
+  //       .then(array => array.forEach(
+  //     sentence => this.add(sentence)))
+  //       .catch(function(err) {
+  //         console.log("Didn't connect to the API", err)
+  //     })
+  //   }
+  // }
   nextId() {
     this.uniqueId = this.uniqueId || 0
     return this.uniqueId++

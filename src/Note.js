@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Draggable, {DraggableCore} from 'react-draggable';
 
 class Note extends Component {
   constructor() {
@@ -16,6 +17,15 @@ class Note extends Component {
       top: this.randomBetween(0, window.innerHeight -150, 'px')
     }
   }
+  componentDidUpdate() {
+    if (this.state.editing) {
+      this.refs.newText.focus()
+      this.refs.newText.select()
+    }
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.props.children !== nextProps.children || this.state !== nextState
+  }
   randomBetween(x, y, s) {
     return (x + Math.ceil(Math.random() * (y-x))) + s
   }
@@ -32,7 +42,8 @@ class Note extends Component {
   renderForm(){
     return (
       <div className="note" style={this.style}>
-        <textarea ref="newText"></textarea>
+        <textarea ref="newText"
+                  defaultValue={this.props.children}></textarea>
         <button onClick = {this.save}>SAVE</button>
       </div>
     );
@@ -49,7 +60,11 @@ class Note extends Component {
     );
   }
   render() {
-    return (this.state.editing) ? this.renderForm(): this.renderDisplay()
+    return (
+      <Draggable>
+          {(this.state.editing) ? this.renderForm() : this.renderDisplay()}
+      </Draggable>
+    )
   }
 }
 
