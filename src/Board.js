@@ -7,22 +7,46 @@ class Board extends Component {
     super();
     this.state = {
         notes: [
-          'Learn HTMl Semantics',
-          'Learn JavaScript',
-          'Become Expert in JavaScript',
-          'Learn React'
+          {id: 0, note: 'Learn HTMl Semantics'},
+          {id: 1, note: 'Learn JavaScript'},
+          {id: 2, note: 'Become Expert in JavaScript'},
+          {id: 3, note: 'Learn React'}
         ]
     };
+    this.update = this.update.bind(this);
+    this.remove = this.remove.bind(this);
+    this.eachNote = this.eachNote.bind(this);
   }
-  render() {
-    return (
-      <div className="board">
-        {this.state.notes.map((note, i) => {
-          return <Note key={i}>{note}</Note>
-        })}
-      </div>
-    )
-  }
+  update(newText, id) {
+    var notes = this.state.notes.map(
+      note => (note.id !== id) ?
+      note :
+        {
+          ...note,
+          note: newText
+        }
+      )
+      this.setState({notes})
+    }
+    remove(id) {
+      var notes = this.state.notes.filter(note => note.id !== id)
+      this.setState({notes})
+    }
+    eachNote(note) {
+      return (
+        <Note key={note.id}
+          id={note.id}
+          onChange={this.update}
+          onRemove={this.remove}>
+          {note.note}
+        </Note>
+      )
+    }
+    render() {
+      return (<div className='board'>
+      {this.state.notes.map(this.eachNote)}
+      </div>)
+    }
 }
 
 Board.propTypes = {

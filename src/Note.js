@@ -14,12 +14,11 @@ class Note extends Component {
     this.setState({editing: true});
   }
   save(){
-    var newValue = this.refs.newText.value
-    alert("I will be saving this value: " + newValue)
-    this.setState({editing: false});
+    this.props.onChange(this.refs.newText.value, this.props.id)
+    this.setState({editing: false})
   }
   remove(){
-    alert("I am going to remove note")
+    this.props.onRemove(this.props.id)
   }
   renderForm(){
     return (
