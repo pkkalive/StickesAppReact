@@ -4,7 +4,7 @@ class Note extends Component {
   constructor() {
         super();
         this.state = {editing: false };
-				this.edit = this.edit.bind(this);
+        this.edit = this.edit.bind(this);
         this.save = this.save.bind(this);
         this.remove = this.remove.bind(this);
         this.renderForm = this.renderForm.bind(this);
@@ -14,6 +14,8 @@ class Note extends Component {
     this.setState({editing: true});
   }
   save(){
+    var newValue = this.refs.newText.value
+    alert("I will be saving this value: " + newValue)
     this.setState({editing: false});
   }
   remove(){
@@ -22,7 +24,7 @@ class Note extends Component {
   renderForm(){
     return (
       <div className="note">
-        <textarea></textarea>
+        <textarea ref="newText"></textarea>
         <button onClick = {this.save}>SAVE</button>
       </div>
     );
