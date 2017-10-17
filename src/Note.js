@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 
 class Note extends Component {
   constructor() {
-        super();
-        this.state = {editing: false };
-        this.edit = this.edit.bind(this);
-        this.save = this.save.bind(this);
-        this.remove = this.remove.bind(this);
-        this.renderForm = this.renderForm.bind(this);
-        this.renderDisplay = this.renderDisplay.bind(this);
+    super();
+    this.state = {editing: false };
+    this.edit = this.edit.bind(this);
+    this.save = this.save.bind(this);
+    this.remove = this.remove.bind(this);
+    this.renderForm = this.renderForm.bind(this);
+    this.renderDisplay = this.renderDisplay.bind(this);
   }
   edit(){
     this.setState({editing: true});
