@@ -1,13 +1,33 @@
 import React, { Component } from 'react';
 
 class Note extends Component {
+  constructor() {
+        super();
+        this.state = {editing: false };
+				this.edit = this.edit.bind(this);
+        this.save = this.save.bind(this);
+        this.remove = this.remove.bind(this);
+        this.renderForm = this.renderForm.bind(this);
+        this.renderDisplay = this.renderDisplay.bind(this);
+  }
   edit(){
-    alert("I am going to edit note")
+    this.setState({editing: true});
+  }
+  save(){
+    this.setState({editing: false});
   }
   remove(){
     alert("I am going to remove note")
   }
-  render() {
+  renderForm(){
+    return (
+      <div className="note">
+        <textarea></textarea>
+        <button onClick = {this.save}>SAVE</button>
+      </div>
+    );
+  }
+  renderDisplay(){
     return (
       <div className="note">
         <p>{this.props.children}</p>
@@ -17,6 +37,9 @@ class Note extends Component {
         </span>
       </div>
     );
+  }
+  render() {
+    return (this.state.editing) ? this.renderForm(): this.renderDisplay()
   }
 }
 
